@@ -1,4 +1,4 @@
->Linux
+#Linux
 -a kernel (part of an OS that oversees CPU activity)
 -used as a server for web and database services
 >Systems Administration
@@ -7,7 +7,7 @@
 -certifications: RHCSA, CompTIA Server+, CompTIA A+
 -associations; LOPSA, ACM, NPA
 -codes of ethics: LOPSA, NPA
->Systems Librarianship
+#Systems Librarianship
 -"the people who identify the needs of the library for automated systems, cause these systems to be implemented, and analyze the operations of the library"
 -constantly changing, and requires constant learning
 -includes server management, documentation, tech exploration and evaluation, etc.
