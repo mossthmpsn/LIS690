@@ -46,3 +46,85 @@ I created this site using the Apache HTTP server.</p>
 </body>
 </html>
 
+# PHP
+- PHP: a server-side programming language (has to be installed on the server--specifically the web server for system/web admins)
+- Installing PHP
+	- input: sudo apt install php libapache2-mod-php
+	sudo systemctl restart apache2
+	- confirm the installed version: php -v
+	- check status: systemctl status apache2
+- Check Install
+	- check if it's installed w Apache by checking web doc root: cd /var/www/html/
+	sudo nano info.php
+	- put this in the file: <?php
+	phpinfo();
+	?>
+	- visit file using: http://[insert public IP address for VM]/info.php
+	- delete the site: sudo rm /var/www/html/info.php
+- Basic Configurations
+	- edit dir.conf file to default to index.php: cd /etc/apache2/mods-enabled/
+	sudo cp dir.conf dir.conf.bak
+	sudo nano dir.conf
+	- change file, putting index.php to the front: DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+	- check configuration: apachectl configtest
+	- check status: sudo systemctl reload apache2
+	sudo systemctl restart apache2
+	systemctl status apache2
+- Create an index.php file
+	- create and open an index.php file: cd /var/www/html/
+	sudo nano index.php
+	- create a simple browser detector: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Detector</title>
+</head>
+<body>
+    <h1>Browser & OS Detection</h1>
+    <p>You are using the following browser to view this site:</p>
+
+    <?php
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+    // Browser Detection
+    if (stripos($user_agent, 'Edge') !== false) {
+        $browser = 'Microsoft Edge';
+    } elseif (stripos($user_agent, 'Firefox') !== false) {
+        $browser = 'Mozilla Firefox';
+    } elseif (stripos($user_agent, 'Chrome') !== false && stripos($user_agent, 'Chromium') === false) {
+        $browser = 'Google Chrome';
+    } elseif (stripos($user_agent, 'Chromium') !== false) {
+        $browser = 'Chromium';
+    } elseif (stripos($user_agent, 'Opera Mini') !== false) {
+        $browser = 'Opera Mini';
+    } elseif (stripos($user_agent, 'Opera') !== false || stripos($user_agent, 'OPR') !== false) {
+        $browser = 'Opera';
+    } elseif (stripos($user_agent, 'Safari') !== false && stripos($user_agent, 'Chrome') === false) {
+        $browser = 'Safari';
+    } else {
+        $browser = 'Unknown Browser';
+    }
+
+    // OS Detection
+    if (stripos($user_agent, 'Windows') !== false) {
+        $os = 'Windows';
+    } elseif (stripos($user_agent, 'Mac') !== false || stripos($user_agent, 'Macintosh') !== false) {
+        $os = 'Mac';
+    } elseif (stripos($user_agent, 'Linux') !== false) {
+        $os = 'Linux';
+    } elseif (stripos($user_agent, 'iOS') !== false || stripos($user_agent, 'iPhone') !== false || stripos($user_agent, 'iPad') !== false) {
+        $os = 'iOS';
+    } elseif (stripos($user_agent, 'Android') !== false) {
+        $os = 'Android';
+    } else {
+        $os = 'Unknown OS';
+    }
+
+    // Output Result
+    echo "<p>Your browser is <strong>$browser</strong> and your operating system is <strong>$os</strong>.</p>";
+    ?>
+
+</body>
+</html>
+	- save file, visit site: http://[insert public IP address]/
