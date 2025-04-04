@@ -53,6 +53,6 @@
 
 # Challenges
 
-- My main challenge was the fact that I was using the wrong version of Ubuntu. Overall, once I installed the correct version, I didn't encounter many issues.
+- My main challenge was the fact that I was using the wrong version of Ubuntu. I also had issues accessing the HTTP simply because I didn't understand the directions. Otherwise, everything ran fairly smoothly.
 
 
